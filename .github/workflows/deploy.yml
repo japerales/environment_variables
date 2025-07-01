@@ -12,8 +12,8 @@ jobs:
     environment: testing
     env:
       MONGODB_CLUSTER_ADDRESS: cluster0.dgpbgb9.mongodb.net
-      MONGODB_USERNAME: japerales
-      MONGODB_PASSWORD: rAtvXb6StBCQIhgq
+      MONGODB_USERNAME: ${{secrets.MONGODB_USERNAME}}
+      MONGODB_PASSWORD: ${{secrets.MONGODB_PASSWORD}}
       PORT: 8080
     runs-on: ubuntu-latest
     steps:
@@ -39,5 +39,7 @@ jobs:
     steps:
       - name: Output information
         run: |        
-          echo "MONGODB_USERNAME: ${{env.MONGODB_USERNAME}}"
+          echo "MONGODB_USERNAME: ${{env.MONGODB_USERNAME}}" 
+          #no va a salir porque MONGODB_USERNAME es una variable de entorno de un job, y por tanto no accesible en este job
           echo "MONGODB_DB_NAME: $MONGODB_DB_NAME"
+          #esta variable es global y si va a salir.
